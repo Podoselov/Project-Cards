@@ -1,39 +1,23 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
+import { merge } from 'webpack-merge';
 import { buildDirectory, sourceDirectory } from '../webpack/constans.js';
+import * as modules from '../modules/index.js';
 
 const common = () => {
-  return {
-    entry: [sourceDirectory],
-    output: {
-      path: buildDirectory,
-      filename: 'bundle.js',
+  return merge(
+    {
+      entry: [sourceDirectory],
+      output: {
+        path: buildDirectory,
+        filename: 'js/bundle.js',
+      },
     },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          use: {
-            loader: 'babel-loader',
-          },
-        },
-        {
-          test: /\.s[ac]ss$/i,
-          use: [
-            'style-loader',
-            { loader: 'css-loader', options: { modules: true } },
-            'sass-loader',
-          ],
-        },
-      ],
-    },
-
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: './index.html',
-      }),
-    ],
-  };
+    modules.loadJavaScript(),
+    modules.setupHtml(),
+    modules.loadCss(),
+    modules.loadFonts(),
+    modules.loadSvg(),
+    modules.loadScss()
+  );
 };
 
 export default common;
