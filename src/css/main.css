@@ -1,3 +1,163 @@
-p {
-  color: black;
+body {
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+  max-width: 1200px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.filter {
+  padding: 30px 0;
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  background-color: #375292;
+  color: white;
+  padding: 8px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #253966;
+}
+
+.label {
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 200px;
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1px solid #cecece;
+  background: #f6f6f6;
+  border-radius: 8px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.textarea {
+  overflow: auto;
+  resize: none;
+  width: 200px;
+  height: 80px;
+  background: #f6f6f6;
+  border: 1px solid #cecece;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 20px;
+}
+
+.select {
+  width: 200px;
+  font-size: 13px;
+  padding: 6px;
+  border: 1px solid #cecece;
+  background: #f6f6f6;
+  border-radius: 8px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  padding: 40px;
+  width: 30%;
+  text-align: left;
+  position: relative;
+  text-align: left;
+  border-radius: 15px;
+}
+
+.modal-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
+
+.close-button {
+  color: #aaa;
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.cards-button {
+  background-color: #aaa;
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 15px 0 0;
+}
+
+.cards-button:hover {
+  background-color: #375292;
+  color: white;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+}
+
+.cards-item {
+  margin-top: 25px;
+  background: #f6f6f6;
+  border: 1px solid #cecece;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+}
+
+.cards-item-text {
+  margin-bottom: 15px;
 }

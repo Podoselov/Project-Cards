@@ -11,6 +11,18 @@ export const loadCss = () => ({
   },
 });
 
+export const loadProdCss = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+  plugins: [new MiniCssExtractPlugin()],
+});
+
 export const loadScss = () => ({
   module: {
     rules: [
