@@ -1,21 +1,23 @@
-import Element from './classEL.js';
+import Element from "./classEL.js";
 
-class LabelEl extends Element {
-  constructor() {
+class Label extends Element {
+  constructor(classes, text, child) {
     super();
+    this.classes = classes;
+    this.text = text;
+    this.child = child;
   }
-  renderLabel(classNamesLabel = [], textLabel, newAtrLabel = {}) {
-    this.labelEl = this.createElement('label', classNamesLabel);
-    if (textLabel) {
-      this.labelEl.textContent = textLabel;
-    }
-    if (newAtrLabel) {
-      for (const key in newAtrLabel) {
-        this.labelEl.setAttribute(key, newAtrLabel[key]);
-      }
-    }
-    return this.labelEl;
+  
+  createLabel() {
+    this.createElement(
+      "label",
+      this.classes,
+      {},
+      this.text
+    );
+    this.element.append(this.child)
+    return this.element;
   }
 }
 
-export default LabelEl;
+export default Label;

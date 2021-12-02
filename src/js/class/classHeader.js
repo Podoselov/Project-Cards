@@ -5,7 +5,7 @@ class ElementHeader extends Element {
     super();
   }
 
-  renderHeader() {
+  render() {
     this.headerEl = this.createElement('header', ['page__header', 'header']);
     this.headerLogoContainer = this.createElement('a', ['header__logo-link'], {
       href: '#',

@@ -1,17 +1,22 @@
 class Element {
-  constructor() {}
+  constructor() {
+    this.element = null;
+  }
   createElement(elemTag, classNames = [], newAtr = {}, text) {
-    const el = document.createElement(elemTag);
-    el.classList.add(...classNames);
+    this.element = document.createElement(elemTag);
+    this.element.classList.add(...classNames);
     if (text) {
-      el.textContent = text;
+      this.element.innerHTML = text;
     }
     if (newAtr) {
       for (const key in newAtr) {
-        el.setAttribute(key, newAtr[key]);
+        this.element.setAttribute(key, newAtr[key]);
       }
     }
-    return el;
+    return this.element;
+  }
+  insertIntoPage(container) {
+    container.append(this.element);
   }
 }
 export default Element;
