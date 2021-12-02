@@ -9,14 +9,14 @@ body {
   box-sizing: border-box;
   max-width: 1200px;
 }
-.header {
+.page__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
 }
 
-.filter {
+.page__filter {
   padding: 30px 0;
   border-bottom: 1px solid gray;
   border-top: 1px solid gray;
