@@ -1,15 +1,15 @@
 import Element from './classEL.js';
-import LabelEl from './classLabel.js';
+import Label from './classLabel.js';
 
 class FilterEl extends Element {
   constructor() {
     super();
   }
-  renderFilterEl() {
+  render() {
     this.containerEl = this.createElement('div', ['page__filter']);
-    this.labelFilterEl = new LabelEl();
-    // this.labelFilterEl.renderLabel(['label'], 'text');
-    console.log(this.labelFilterEl.renderLabel(['label'], 'text'));
+    this.labelFilterEl = new Label(["label"], "text" ["child"]);
+    // this.labelFilterEl.render(['label'], 'text');
+    console.log(this.labelFilterEl.createLabel());
   }
 }
 
