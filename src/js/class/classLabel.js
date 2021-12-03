@@ -7,8 +7,8 @@ class Label extends Element {
     this.text = text;
     this.child = child;
   }
-  
-  createLabel() {
+
+  create() {
     this.createElement(
       "label",
       this.classes,

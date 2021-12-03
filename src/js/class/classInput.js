@@ -6,7 +6,7 @@ class Input extends Element {
     this.classes = classes;
     this.id = id;
   }
-  createInput() {
+  create() {
     this.createElement(
       "input",
       this.classes,

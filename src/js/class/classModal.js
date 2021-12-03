@@ -6,16 +6,15 @@ class Modal extends Element {
     this.children = children;
   }
 
-  createModal() {
-      const container = document.createElement("div");
-      document.body.append(container);
-    container.classList.add("modal", "d-none");
-    container.id = "log-in-modal";
+  create() {
+    const container = document.createElement("div");
+    document.body.prepend(container);
+    container.classList.add("modal");
     this.createElement("div", ["modal-content"]);
     this.children.forEach((child) => {
       this.element.append(child);
     });
-    return container.append(this.element);
+    container.append(this.element);
   }
 }
 

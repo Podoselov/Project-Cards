@@ -1,8 +1,9 @@
-import Visit from "./classVisit.js";
 import Input from "./classInput.js";
 import Label from "./classLabel.js";
 import Modal from "./classModal.js";
-class VisitCardiologist extends Visit {
+import Visit from "./classVisit.js";
+
+class VisitTherapist extends Visit {
   constructor() {
     super();
   }
@@ -13,26 +14,11 @@ class VisitCardiologist extends Visit {
       this.selectUrgency().create(),
       this.targetInput().create(),
       this.descriptionInput().create(),
-      this.pressureInput().create(),
-      this.BMI().create(),
-      this.deseasesInput().create(),
       this.ageInput().create(),
       this.createButton().create(),
       this.closeBtn().create(),
     ]);
     modal.create();
-  }
-  pressureInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Pressure`, input.create());
-  }
-  BMI() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `BMI`, input.create());
-  }
-  deseasesInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Deseases`, input.create());
   }
   ageInput() {
     const input = new Input(["input"], "");
@@ -40,4 +26,4 @@ class VisitCardiologist extends Visit {
   }
 }
 
-export default VisitCardiologist;
+export default VisitTherapist;

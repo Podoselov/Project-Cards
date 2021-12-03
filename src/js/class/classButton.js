@@ -12,7 +12,7 @@ class Button extends Element {
   //     this.insertIntoPage(container);
   //     this.addClickHandler();
   //   }
-  createButton() {
+  create() {
     this.createElement(
       "button",
       this.classes,
