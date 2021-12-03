@@ -9,7 +9,7 @@ class FilterEl extends Element {
     this.containerEl = this.createElement('div', ['page__filter']);
     this.labelFilterEl = new Label(["label"], "text" ["child"]);
     // this.labelFilterEl.render(['label'], 'text');
-    console.log(this.labelFilterEl.createLabel());
+    console.log(this.labelFilterEl.create());
   }
 }
 
