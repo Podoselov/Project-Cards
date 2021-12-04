@@ -1,24 +1,19 @@
-"use strict";
-import "../css/main.css";
-import "../img/logo.png";
-import "../css/reset.css";
-import ElementHeader from "./class/classHeader.js";
-import Button from "./class/classButton.js";
-import Select from "./class/classSelect.js";
-import FilterEl from "./class/classFilter.js";
-import Modal from "./class/classModal.js";
-import Label from "./class/classLabel";
-import Input from "./class/classInput";
-import Login from "./class/classLogin";
-import Visit from "./class/classVisit";
-import VisitDentist from "./class/classVisitDentist";
-import VisitCardiologist from "./class/classVisitCardeologist";
+'use strict';
+import '../css/main.css';
+import '../img/logo.png';
+import '../css/reset.css';
+import Element from './class/classEL.js';
+import ElementHeader from './class/classHeader.js';
+import FilterEl from './class/classFilter.js';
 
-const el = new ElementHeader();
-el.render();
-const filter = new FilterEl();
-filter.render();
-// const loginModal = new Login();
-// loginModal.render();
-// const visit = new VisitCardiologist();
-// visit.render();
+function createHtml() {
+  const body = document.body;
+  const container = new Element();
+  const containerEl = container.createElement('div', ['container']);
+  const headerEl = new ElementHeader();
+  const filterEl = new FilterEl();
+  containerEl.append(headerEl.render(), filterEl.render());
+  return body.append(containerEl);
+}
+
+createHtml();

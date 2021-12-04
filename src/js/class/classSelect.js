@@ -1,4 +1,4 @@
-import Element from "./classEL.js";
+import Element from './classEL.js';
 
 class Select extends Element {
   constructor(id, text) {
@@ -8,8 +8,13 @@ class Select extends Element {
   }
 
   create() {
-    this.createElement("select", ["select"], {id: this.id}, this.text);
-      return this.element;
+    this.createElement(
+      'select',
+      ['select'],
+      { id: this.id },
+      (this.text = null)
+    );
+    return this.element;
   }
 }
 

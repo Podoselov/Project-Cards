@@ -1,5 +1,5 @@
 import Element from './classEL.js';
-
+import Button from './classButton.js';
 class ElementHeader extends Element {
   constructor() {
     super();
@@ -14,16 +14,16 @@ class ElementHeader extends Element {
       src: 'images/logo.png',
       width: '100px',
     });
-    this.headerButtonEl = this.createElement(
-      'button',
+    this.headerButtonEl = new Button(
       ['header__button', 'button'],
-      {
-        id: 'log-in-button',
-      },
+      'log-in-button',
       'Log in'
     );
     this.headerLogoContainer.append(this.headerLogo);
-    this.headerEl.append(this.headerLogoContainer, this.headerButtonEl);
+    this.headerEl.append(
+      this.headerLogoContainer,
+      this.headerButtonEl.create()
+    );
     return this.headerEl;
   }
 }

@@ -1,4 +1,4 @@
-import Element from "./classEL.js";
+import Element from './classEL.js';
 
 class Input extends Element {
   constructor(classes, id) {
@@ -7,14 +7,10 @@ class Input extends Element {
     this.id = id;
   }
   create() {
-    this.createElement(
-      "input",
-      this.classes,
-      {
-          id: this.id,
-          type: "text"
-      }, ""
-    );
+    this.element = this.createElement('input', this.classes, {
+      id: this.id,
+      type: 'text',
+    });
     return this.element;
   }
 }
