@@ -2,25 +2,30 @@ import Visit from "./classVisit.js";
 import Input from "./classInput.js";
 import Label from "./classLabel.js";
 import Modal from "./classModal.js";
+
 class VisitCardiologist extends Visit {
   constructor() {
     super();
+    this.pressure = this.pressureInput().create();
+    this.BMI = this.BMI().create();
+    this.deseases = this.deseasesInput().create();
+    this.age = this.ageInput().create();
+    this.element = this.createModal().create();
   }
-  render() {
-    const modal = new Modal([
-      this.selectDoctor().create(),
-      this.nameInput().create(),
-      this.selectUrgency().create(),
-      this.targetInput().create(),
-      this.descriptionInput().create(),
-      this.pressureInput().create(),
-      this.BMI().create(),
-      this.deseasesInput().create(),
-      this.ageInput().create(),
-      this.createButton().create(),
-      this.closeBtn().create(),
+  createModal() {
+    return new Modal([
+      this.doctor,
+      this.name,
+      this.urgency,
+      this.target,
+      this.description,
+      this.pressure,
+      this.BMI,
+      this.deseases,
+      this.age,
+      this.createBtn,
+      this.closeBtn,
     ]);
-    modal.create();
   }
   pressureInput() {
     const input = new Input(["input"], "");
