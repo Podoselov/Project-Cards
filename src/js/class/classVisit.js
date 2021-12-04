@@ -6,28 +6,36 @@ import Modal from "./classModal.js";
 import Element from "./classEL.js";
 
 class Visit {
-  constructor(target, description, urgency, name) {
-    this.target = target;
-    this.description = description;
-    this.urgency = urgency;
-    this.name = name;
+  constructor() {
+    this.doctor = this.selectDoctor().create();
+    this.createBtn = this.createButton().create();
+    this.closeBtn = this.closeBtn().create();
+    this.target = this.targetInput().create();
+    this.description = this.descriptionInput().create();
+    this.urgency = this.selectUrgency().create();
+    this.name = this.nameInput().create();
+    this.element = this.createModal().create();
   }
   render() {
-    const modal = new Modal([
-      this.selectDoctor().create(),
-      this.nameInput().create(),
-      this.selectUrgency().create(),
-      this.targetInput().create(),
-      this.descriptionInput().create(),
-      this.createButton().create(),
-      this.closeBtn().create(),
+    document.body.prepend(this.element);
+    this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
+    this.createBtn.addEventListener("click", this.handleCreateClick.bind(this));
+  }
+  createModal() {
+    return new Modal([
+      this.doctor,
+      this.name,
+      this.urgency,
+      this.target,
+      this.description,
+      this.createBtn,
+      this.closeBtn,
     ]);
-    modal.create();
   }
   selectDoctor() {
     const selectDoctor = new Select(
-      "",
-      '<option value="">Dentist</option><option value="">Cardiologist</option><option value="">Therapist</option>'
+      "select-doctor-card",
+      '<option value="" selected disabled hidden>Choose doctor</option><option value="Dentist">Dentist</option><option value="Cardiologist">Cardiologist</option><option value="Therapist">Therapist</option>'
     );
     return new Label(
       ["label", "d-block"],
@@ -40,10 +48,10 @@ class Visit {
     return new Label(["label", "d-block"], `Name`, nameInput.create());
   }
   selectUrgency() {
-    const selectUrgency = new Select(
-      "",
-      '<select class="select" name="" id=""><option value="">High</option><option value="">Normal</option><option value="">Low</option>'
-    );
+   const selectUrgency = new Select(
+     "",
+     '<option value="" selected disabled hidden>Choose urgency</option><select class="select" name="" id=""><option value="High">High</option><option value="">Normal</option><option value="">Low</option>'
+   );
     return new Label(
       ["label", "d-block"],
       `Select urgency`,
@@ -75,6 +83,12 @@ class Visit {
   }
   closeBtn() {
     return new Button(["close-button"], "close-button", "x");
+  }
+  handleCloseClick() {
+    this.element.remove();
+  }
+  handleCreateClick() {
+    console.log("hello");
   }
 }
 

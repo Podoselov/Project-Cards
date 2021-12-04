@@ -8,13 +8,14 @@ class Modal extends Element {
 
   create() {
     const container = document.createElement("div");
-    document.body.prepend(container);
+
     container.classList.add("modal");
     this.createElement("div", ["modal-content"]);
     this.children.forEach((child) => {
       this.element.append(child);
     });
     container.append(this.element);
+    return container;
   }
 }
 

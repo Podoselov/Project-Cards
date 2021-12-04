@@ -6,19 +6,20 @@ import Visit from "./classVisit.js";
 class VisitDentist extends Visit {
   constructor() {
     super();
+    this.lastVisit = this.lastVisitInput().create();
+    this.element = this.createModal().create();
   }
-  render() {
-    const modal = new Modal([
-      this.selectDoctor().create(),
-      this.nameInput().create(),
-      this.selectUrgency().create(),
-      this.targetInput().create(),
-      this.descriptionInput().create(),
-      this.lastVisitInput().create(),
-      this.createButton().create(),
-      this.closeBtn().create(),
+  createModal() {
+    return new Modal([
+      this.doctor,
+      this.name,
+      this.urgency,
+      this.target,
+      this.description,
+      this.lastVisit,
+      this.createBtn,
+      this.closeBtn,
     ]);
-    modal.create();
   }
   lastVisitInput() {
     const input = new Input(["input"], "");

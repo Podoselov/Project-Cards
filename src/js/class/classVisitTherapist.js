@@ -6,19 +6,20 @@ import Visit from "./classVisit.js";
 class VisitTherapist extends Visit {
   constructor() {
     super();
+    this.age = this.ageInput().create();
+    this.element = this.createModal().create();
   }
-  render() {
-    const modal = new Modal([
-      this.selectDoctor().create(),
-      this.nameInput().create(),
-      this.selectUrgency().create(),
-      this.targetInput().create(),
-      this.descriptionInput().create(),
-      this.ageInput().create(),
-      this.createButton().create(),
-      this.closeBtn().create(),
+  createModal() {
+    return new Modal([
+      this.doctor,
+      this.name,
+      this.urgency,
+      this.target,
+      this.description,
+      this.age,
+      this.createBtn,
+      this.closeBtn,
     ]);
-    modal.create();
   }
   ageInput() {
     const input = new Input(["input"], "");
