@@ -53,7 +53,7 @@ addPopupButton.addEventListener('click', () => {
 
 
 
-// loginModal.render();
+loginModal.render();
 // visit.render();
 // visitCardiologist.render();
 // visitDentist.render();
