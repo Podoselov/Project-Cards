@@ -5,6 +5,8 @@ import Button from "./classButton.js";
 import Modal from "./classModal.js";
 import Element from "./classEL.js";
 
+const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
+
 class Visit {
   constructor(handleChangePopup) {
     this.doctor = this.selectDoctor().create();
@@ -48,25 +50,18 @@ class Visit {
     );
     const renderedSelect = selectDoctor.create();
 
-
-    return new Label(
-      ["label", "d-block"],
-      `Select doctor`,
-      renderedSelect
-    );
-
+    return new Label(["label", "d-block"], `Select doctor`, renderedSelect);
   }
-
 
   nameInput() {
     const nameInput = new Input(["input"], "");
     return new Label(["label", "d-block"], `Name`, nameInput.create());
   }
   selectUrgency() {
-   const selectUrgency = new Select(
-     "",
-     '<option value="" selected disabled hidden>Choose urgency</option><select class="select" name="" id=""><option value="High">High</option><option value="">Normal</option><option value="">Low</option>'
-   );
+    const selectUrgency = new Select(
+      "",
+      '<option value="" selected disabled hidden>Choose urgency</option><select class="select" name="" id=""><option value="High">High</option><option value="">Normal</option><option value="">Low</option>'
+    );
     return new Label(
       ["label", "d-block"],
       `Select urgency`,
@@ -74,7 +69,6 @@ class Visit {
     );
   }
 
-  
   targetInput() {
     const targetInput = new Input(["input"], "");
     return new Label(["label", "d-block"], `Target`, targetInput.create());
@@ -104,10 +98,25 @@ class Visit {
   handleCloseClick() {
     this.element.remove();
   }
-  handleCreateClick() {
-    console.log("hello");
+  async handleCreateClick() {
+    console.log(this.name.value);
+    await fetch("https://ajax.test-danit.com/api/v2/cards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: `${this.name.value}`,
+        description: `${this.description.value}`,
+        doctor: `${this.doctor.value}`,
+        urgency: `${this.urgency.value}`,
+        target: `${this.target.value}`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response));
   }
 }
 
 export default Visit;
-

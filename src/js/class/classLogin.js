@@ -15,6 +15,10 @@ class Login {
     console.log(this.password);
     document.body.prepend(this.element);
     this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
+    this.loginBtn.addEventListener(
+      "click",
+      this.handleLoginCheckout.bind(this)
+    );
   }
   createModal() {
     return new Modal([
@@ -40,6 +44,27 @@ class Login {
   }
   loginBtn() {
     return new Button(["button"], "login-button", "Log in");
+  }
+  async handleLoginCheckout() {
+    const response = await fetch(
+      "https://ajax.test-danit.com/api/v2/cards/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: `${this.email.value}`,
+          password: `${this.password.value}`,
+        }),
+      }
+    )
+      .then((response) => response.text())
+      .then((token) => {
+        return token;
+      }
+      );
+    console.log(response);
   }
 }
 
