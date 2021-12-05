@@ -1,7 +1,7 @@
-import Input from "./classInput.js";
-import Label from "./classLabel.js";
-import Button from "./classButton.js";
-import Modal from "./classModal.js";
+import Input from './classInput.js';
+import Label from './classLabel.js';
+import Button from './classButton.js';
+import Modal from './classModal.js';
 
 class Login {
   constructor() {
@@ -14,11 +14,7 @@ class Login {
   render() {
     console.log(this.password);
     document.body.prepend(this.element);
-    this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
-    this.loginBtn.addEventListener(
-      "click",
-      this.handleLoginCheckout.bind(this)
-    );
+    this.closeBtn.addEventListener('click', this.handleCloseClick.bind(this));
   }
   createModal() {
     return new Modal([
@@ -32,39 +28,18 @@ class Login {
     this.element.remove();
   }
   emailInput() {
-    const emailInput = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Email`, emailInput.create());
+    const emailInput = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Email`, emailInput.create());
   }
   passwordInput() {
-    const passwordInput = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Password`, passwordInput.create());
+    const passwordInput = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Password`, passwordInput.create());
   }
   closeBtn() {
-    return new Button(["close-button"], "close-button", "x");
+    return new Button(['close-button'], 'close-button', 'x');
   }
   loginBtn() {
-    return new Button(["button"], "login-button", "Log in");
-  }
-  async handleLoginCheckout() {
-    const response = await fetch(
-      "https://ajax.test-danit.com/api/v2/cards/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: `${this.email.value}`,
-          password: `${this.password.value}`,
-        }),
-      }
-    )
-      .then((response) => response.text())
-      .then((token) => {
-        return token;
-      }
-      );
-    console.log(response);
+    return new Button(['button'], 'login-button', 'Log in');
   }
 }
 

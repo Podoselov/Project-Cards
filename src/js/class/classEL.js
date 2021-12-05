@@ -2,7 +2,7 @@ class Element {
   constructor() {
     this.element = null;
   }
-  createElement(elemTag, classNames = [], newAtr = {}, text) {
+  createElement(elemTag, classNames = [], newAtr = {}, text = null) {
     this.element = document.createElement(elemTag);
     this.element.classList.add(...classNames);
     if (text) {
@@ -15,6 +15,7 @@ class Element {
     }
     return this.element;
   }
+
   insertIntoPage(container) {
     container.append(this.element);
   }
