@@ -19,6 +19,7 @@ class ElementHeader extends Element {
       'log-in-button',
       'Log in'
     );
+
     this.headerLogoContainer.append(this.headerLogo);
     this.headerEl.append(
       this.headerLogoContainer,
