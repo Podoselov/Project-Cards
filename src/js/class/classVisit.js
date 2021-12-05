@@ -6,7 +6,7 @@ import Modal from "./classModal.js";
 import Element from "./classEL.js";
 
 class Visit {
-  constructor() {
+  constructor(handleChangePopup) {
     this.doctor = this.selectDoctor().create();
     this.createBtn = this.createButton().create();
     this.closeBtn = this.closeBtn().create();
@@ -15,12 +15,21 @@ class Visit {
     this.urgency = this.selectUrgency().create();
     this.name = this.nameInput().create();
     this.element = this.createModal().create();
+    this.handleChangePopup = handleChangePopup;
   }
   render() {
     document.body.prepend(this.element);
     this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
     this.createBtn.addEventListener("click", this.handleCreateClick.bind(this));
+    this.doctor.addEventListener("change", this.handleChangeForm.bind(this));
   }
+
+  handleChangeForm() {
+    const select = this.doctor.querySelector("select");
+    const value = select.value;
+    this.handleChangePopup(value);
+  }
+
   createModal() {
     return new Modal([
       this.doctor,
@@ -37,12 +46,18 @@ class Visit {
       "select-doctor-card",
       '<option value="" selected disabled hidden>Choose doctor</option><option value="Dentist">Dentist</option><option value="Cardiologist">Cardiologist</option><option value="Therapist">Therapist</option>'
     );
+    const renderedSelect = selectDoctor.create();
+
+
     return new Label(
       ["label", "d-block"],
       `Select doctor`,
-      selectDoctor.create()
+      renderedSelect
     );
+
   }
+
+
   nameInput() {
     const nameInput = new Input(["input"], "");
     return new Label(["label", "d-block"], `Name`, nameInput.create());
@@ -58,6 +73,8 @@ class Visit {
       selectUrgency.create()
     );
   }
+
+  
   targetInput() {
     const targetInput = new Input(["input"], "");
     return new Label(["label", "d-block"], `Target`, targetInput.create());
@@ -93,3 +110,4 @@ class Visit {
 }
 
 export default Visit;
+

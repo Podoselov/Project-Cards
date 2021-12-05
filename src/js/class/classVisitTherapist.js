@@ -4,10 +4,11 @@ import Modal from "./classModal.js";
 import Visit from "./classVisit.js";
 
 class VisitTherapist extends Visit {
-  constructor() {
+  constructor(handleChangePopup) {
     super();
     this.age = this.ageInput().create();
     this.element = this.createModal().create();
+    this.handleChangePopup = handleChangePopup;
   }
   createModal() {
     return new Modal([

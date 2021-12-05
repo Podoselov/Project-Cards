@@ -14,16 +14,45 @@ import Visit from "./class/classVisit";
 import VisitDentist from "./class/classVisitDentist";
 import VisitCardiologist from "./class/classVisitCardiologist";
 import VisitTherapist from "./class/classVisitTherapist";
+import { getCards } from "./cards/cards-new";
 
 const el = new ElementHeader();
 el.render();
 const filter = new FilterEl();
 filter.render();
 const loginModal = new Login();
-const visit = new Visit();
-const visitDentist = new VisitDentist();
-const visitCardiologist = new VisitCardiologist();
-const visitTherapist = new VisitTherapist();
+
+
+
+
+const handleChangePopup = (value) => {
+    document.querySelector(".modal").remove();
+
+    if (value === "Cardiologist") {
+        visitCardiologist.render();
+    } else if (value == "Dentist") {
+        visitDentist.render();
+    } else if (value == "Therapist") {
+        visitTherapist.render();
+    }
+};
+
+const visitDentist = new VisitDentist(handleChangePopup);
+const visitCardiologist = new VisitCardiologist(handleChangePopup);
+const visitTherapist = new VisitTherapist(handleChangePopup);
+
+const addPopupButton = new Button("test-clases", "test-id", "text button").create();
+document.body.append(addPopupButton);
+
+const visit = new Visit(handleChangePopup);
+addPopupButton.addEventListener('click', () => {
+    visit.render();
+});
+
+
+
+
+
 // loginModal.render();
 // visit.render();
 // visitCardiologist.render();
