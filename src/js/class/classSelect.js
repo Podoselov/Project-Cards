@@ -8,12 +8,7 @@ class Select extends Element {
   }
 
   create() {
-    this.createElement(
-      'select',
-      ['select'],
-      { id: this.id },
-      (this.text = null)
-    );
+    this.createElement("select", ["select"], { id: this.id }, this.text);
     return this.element;
   }
 }

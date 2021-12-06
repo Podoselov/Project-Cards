@@ -17,19 +17,19 @@ class Visit {
     this.urgency = this.selectUrgency().create();
     this.name = this.nameInput().create();
     this.element = this.createModal().create();
-    this.handleChangePopup = handleChangePopup;
+    // this.handleChangePopup = handleChangePopup;
   }
   render() {
     document.body.prepend(this.element);
     this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
     this.createBtn.addEventListener("click", this.handleCreateClick.bind(this));
-    this.doctor.addEventListener("change", this.handleChangeForm.bind(this));
+    // this.doctor.addEventListener("change", this.handleChangeForm.bind(this));
   }
 
   handleChangeForm() {
     const select = this.doctor.querySelector("select");
     const value = select.value;
-    this.handleChangePopup(value);
+    // this.handleChangePopup(value);
   }
 
   createModal() {
@@ -48,9 +48,11 @@ class Visit {
       "select-doctor-card",
       '<option value="" selected disabled hidden>Choose doctor</option><option value="Dentist">Dentist</option><option value="Cardiologist">Cardiologist</option><option value="Therapist">Therapist</option>'
     );
-    const renderedSelect = selectDoctor.create();
-
-    return new Label(["label", "d-block"], `Select doctor`, renderedSelect);
+    return new Label(
+      ["label", "d-block"],
+      `Select doctor`,
+      selectDoctor.create()
+    );
   }
 
   nameInput() {

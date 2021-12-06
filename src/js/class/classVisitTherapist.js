@@ -8,9 +8,10 @@ class VisitTherapist extends Visit {
     super();
     this.age = this.ageInput().create();
     this.element = this.createModal().create();
-    this.handleChangePopup = handleChangePopup;
+    // this.handleChangePopup = handleChangePopup;
   }
   createModal() {
+
     return new Modal([
       this.doctor,
       this.name,

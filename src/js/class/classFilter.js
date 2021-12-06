@@ -9,7 +9,7 @@ class FilterEl extends Element {
 
   renderLabelEl(classLabel, textLabel) {
     this.labelFilterEl = new Label([classLabel], textLabel);
-    return this.labelFilterEl.createLabel();
+    return this.labelFilterEl.create();
   }
 
   renderLabelChildren() {
