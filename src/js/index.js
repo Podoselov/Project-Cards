@@ -27,6 +27,9 @@ function createHtml() {
 
 createHtml();
 
+const visit = new Visit();
+visit.render()
+
 // document.querySelector('#select-doctor-card').addEventListener('change', () => {
 //   const value = document.querySelector('#select-doctor-card').value;
 //   console.log(value);

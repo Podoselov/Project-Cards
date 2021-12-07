@@ -4,6 +4,7 @@ import Select from "./classSelect.js";
 import Button from "./classButton.js";
 import Modal from "./classModal.js";
 import Element from "./classEL.js";
+// import Card from "./classCard.js";
 
 const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
 
@@ -98,8 +99,7 @@ class Visit {
     this.element.remove();
   }
   async handleCreateClick() {
-    console.log(this.name.value);
-    await fetch("https://ajax.test-danit.com/api/v2/cards", {
+    let response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,9 +112,12 @@ class Visit {
         urgency: `${this.urgency.value}`,
         target: `${this.target.value}`,
       }),
-    })
-      .then((response) => response.json())
-      .then((response) => console.log(response));
+    });
+    response = response.json();
+    console.log(response);
+    this.element.remove();
+    // const card = new Card();
+    // card.render();
   }
 }
 
