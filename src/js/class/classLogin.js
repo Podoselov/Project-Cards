@@ -3,6 +3,7 @@ import Label from './classLabel.js';
 import Button from './classButton.js';
 import Modal from './classModal.js';
 import getLogin from '../fetch/getUserToken.js';
+import ElementHeader from '../class/classHeader.js';
 
 class Login {
   constructor() {
@@ -11,6 +12,8 @@ class Login {
     this.email = this.emailInput().create();
     this.password = this.passwordInput().create();
     this.element = this.createModal().create();
+    this.btnHeader = document.querySelector('.header__button');
+    this.newBtnHeader = document.querySelector('.header__button-new');
   }
   render() {
     document.body.prepend(this.element);
@@ -44,7 +47,7 @@ class Login {
     return new Button(['button', 'login-button'], 'login-button', 'Log in');
   }
   //Добавил с логином взаимодействие
-  async handleLoginClick() {
+  async handleLoginClick(btnRemoveEl) {
     const tokenValue = await getLogin(
       this.email.firstElementChild.value,
       this.password.firstElementChild.value
@@ -53,6 +56,8 @@ class Login {
       this.email.firstElementChild.value = '';
       this.password.firstElementChild.value = '';
       this.handleCloseClick();
+      this.btnHeader.classList.add('d-none');
+      this.newBtnHeader.classList.remove('d-none');
     } else {
       this.email.firstElementChild.value = '';
       this.password.firstElementChild.value = '';

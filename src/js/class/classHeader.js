@@ -1,6 +1,7 @@
 import Element from './classEL.js';
 import Button from './classButton.js';
 import Login from './classLogin.js';
+import Visit from './classVisit.js';
 class ElementHeader extends Element {
   constructor() {
     super();
@@ -22,8 +23,20 @@ class ElementHeader extends Element {
     );
     this.headerBtnEl = this.headerButtonEl.create();
     this.buttonClick(this.headerBtnEl);
+
+    this.newHeaderButtonEl = new Button(
+      ['header__button-new', 'button', 'd-none'],
+      'create-button',
+      'Create a visit'
+    );
+    this.newHeaderBtnEL = this.newHeaderButtonEl.create();
+    this.newBtnClick(this.newHeaderBtnEL);
     this.headerLogoContainer.append(this.headerLogo);
-    this.headerEl.append(this.headerLogoContainer, this.headerBtnEl);
+    this.headerEl.append(
+      this.headerLogoContainer,
+      this.headerBtnEl,
+      this.newHeaderBtnEL
+    );
     return this.headerEl;
   }
 
@@ -31,18 +44,16 @@ class ElementHeader extends Element {
     btnEl.addEventListener('click', (e) => {
       e.preventDefault();
       const loginModal = new Login();
-      return loginModal.render();
+      loginModal.render();
     });
   }
 
-  buttonToggleClass() {
-    this.newHeaderButtonEl = new Button(
-      ['header__button-new', 'button'],
-      'create-button',
-      'Create a visit'
-    );
-    this.headerButtonEl.remove();
-    this.headerEl.append(this.newHeaderButtonEl.create());
+  newBtnClick(btnEl) {
+    btnEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      const visitModal = new Visit();
+      visitModal.render();
+    });
   }
 }
 
