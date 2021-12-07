@@ -8,7 +8,7 @@ import Element from "./classEL.js";
 const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
 
 class Visit {
-  constructor(handleChangePopup) {
+  constructor() {
     this.doctor = this.selectDoctor().create();
     this.createBtn = this.createButton().create();
     this.closeBtn = this.closeBtn().create();
@@ -17,19 +17,16 @@ class Visit {
     this.urgency = this.selectUrgency().create();
     this.name = this.nameInput().create();
     this.element = this.createModal().create();
-    // this.handleChangePopup = handleChangePopup;
   }
   render() {
     document.body.prepend(this.element);
     this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
     this.createBtn.addEventListener("click", this.handleCreateClick.bind(this));
-    // this.doctor.addEventListener("change", this.handleChangeForm.bind(this));
   }
 
   handleChangeForm() {
     const select = this.doctor.querySelector("select");
     const value = select.value;
-    // this.handleChangePopup(value);
   }
 
   createModal() {
