@@ -45,7 +45,6 @@ import Input from './class/classInput';
 // ).create();
 // document.body.append(addPopupButton);
 
-
 // addPopupButton.addEventListener('click', () => {
 //   visit.render();
 // });
@@ -71,21 +70,22 @@ import Input from './class/classInput';
 //   }
 // });
 
-"use strict";
+('use strict');
 
-import "../css/main.css";
-import "../img/logo.png";
-import "../css/reset.css";
-import Element from "./class/classEL.js";
-import ElementHeader from "./class/classHeader.js";
-import FilterEl from "./class/classFilter.js";
-import Login from "./class/classLogin.js";
-import Visit from "./class/classVisit";
-import VisitDentist from "./class/classVisitDentist";
-import VisitCardiologist from "./class/classVisitCardiologist";
-import VisitTherapist from "./class/classVisitTherapist";
-
-const loginModal = new Login();
+import '../css/main.css';
+import '../img/logo.png';
+import '../css/reset.css';
+import Element from './class/classEL.js';
+import ElementHeader from './class/classHeader.js';
+import FilterEl from './class/classFilter.js';
+import Login from './class/classLogin.js';
+import Visit from './class/classVisit';
+import VisitDentist from './class/classVisitDentist';
+import VisitCardiologist from './class/classVisitCardiologist';
+import VisitTherapist from './class/classVisitTherapist';
+import getLogin from './fetch/getUserToken.js';
+import logInBtn from './listener/headerListener';
+// const loginModal = new Login();
 //   loginModal.render();
 // const visitDentist = new Visit();
 //   visitDentist.render();
@@ -93,12 +93,8 @@ const loginModal = new Login();
 function createHtml() {
   const body = document.body;
   const container = new Element();
-  const containerEl = container.createElement("div", ["container"]);
-  containerEl.addEventListener("click", (e) => {
-    if (e.target.classList.contains("header__button")) {
-      e.target.innerHTML = "Создать визит";
-    }
-  });
+  const containerEl = container.createElement('div', ['container']);
+
   const headerEl = new ElementHeader();
   const filterEl = new FilterEl();
   containerEl.append(headerEl.render(), filterEl.render());
@@ -106,8 +102,3 @@ function createHtml() {
 }
 
 createHtml();
-
-document.querySelector("#log-in-button").addEventListener("click", () => {
-  loginModal.render();
-});
-

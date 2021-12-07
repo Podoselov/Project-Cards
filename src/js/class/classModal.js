@@ -1,4 +1,4 @@
-import Element from "./classEL.js";
+import Element from './classEL.js';
 
 class Modal extends Element {
   constructor(children) {
@@ -7,10 +7,10 @@ class Modal extends Element {
   }
 
   create() {
-    const container = document.createElement("div");
+    const container = document.createElement('div');
 
-    container.classList.add("modal");
-    this.createElement("div", ["modal-content"]);
+    container.classList.add('modal');
+    this.createElement('div', ['modal-content']);
     this.children.forEach((child) => {
       this.element.append(child);
     });

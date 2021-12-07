@@ -9,7 +9,7 @@ class Label extends Element {
   }
 
   create() {
-    this.createElement("label", this.classes, {}, this.text);
+    this.createElement('label', this.classes, {}, this.text);
     this.element.append(this.child);
     return this.element;
   }

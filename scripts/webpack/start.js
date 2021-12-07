@@ -11,6 +11,7 @@ import { host, port } from './constans.js';
 const server = new devServer(compiler, {
   host: host,
   port: port,
+
   historyApiFallback: true,
   overlay: true,
   quiet: true,

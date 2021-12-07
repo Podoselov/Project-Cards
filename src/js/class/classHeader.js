@@ -1,5 +1,6 @@
 import Element from './classEL.js';
 import Button from './classButton.js';
+import Login from './classLogin.js';
 class ElementHeader extends Element {
   constructor() {
     super();
@@ -19,12 +20,29 @@ class ElementHeader extends Element {
       'log-in-button',
       'Log in'
     );
+    this.headerBtnEl = this.headerButtonEl.create();
+    this.buttonClick(this.headerBtnEl);
     this.headerLogoContainer.append(this.headerLogo);
-    this.headerEl.append(
-      this.headerLogoContainer,
-      this.headerButtonEl.create()
-    );
+    this.headerEl.append(this.headerLogoContainer, this.headerBtnEl);
     return this.headerEl;
+  }
+
+  buttonClick(btnEl) {
+    btnEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      const loginModal = new Login();
+      return loginModal.render();
+    });
+  }
+
+  buttonToggleClass() {
+    this.newHeaderButtonEl = new Button(
+      ['header__button-new', 'button'],
+      'create-button',
+      'Create a visit'
+    );
+    this.headerButtonEl.remove();
+    this.headerEl.append(this.newHeaderButtonEl.create());
   }
 }
 
