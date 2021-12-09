@@ -4,8 +4,9 @@ import VisitDentist from "./classVisitDentist";
 import VisitCardiologist from "./classVisitCardiologist";
 import VisitTherapist from "./classVisitTherapist";
 
+const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
 class Card extends Element {
-  constructor(
+  constructor({
     id,
     doctor,
     target,
@@ -16,8 +17,8 @@ class Card extends Element {
     BMI,
     deseases,
     age,
-    lastVisit
-  ) {
+    lastVisit,
+  }) {
     super();
     this.id = id;
     this.doctor = doctor;
@@ -37,7 +38,6 @@ class Card extends Element {
   }
 
   render() {
-    console.log(this.urgency);
     this.create();
     this.showMoreBtn.addEventListener(
       "click",
@@ -126,6 +126,7 @@ class Card extends Element {
     if (this.doctor == "Cardiologist") {
       const visit = new VisitCardiologist();
       visit.render();
+      visit.element.setAttribute("id", this.id);
       visit.name.querySelector("input").value = this.name;
       visit.target.querySelector("input").value = this.target;
       visit.description.querySelector("textarea").value = this.description;
@@ -137,11 +138,13 @@ class Card extends Element {
         .querySelector("select")
         .querySelector(`option[value=${this.urgency}`)
         .setAttribute("selected", "");
+      visit.createBtn.classList.add("update");
       visit.createBtn.innerHTML = "Update";
     }
     if (this.doctor == "Dentist") {
       const visit = new VisitDentist();
       visit.render();
+      visit.element.setAttribute("id", this.id);
       visit.name.querySelector("input").value = this.name;
       visit.target.querySelector("input").value = this.target;
       visit.description.querySelector("textarea").value = this.description;
@@ -150,12 +153,14 @@ class Card extends Element {
         .querySelector("select")
         .querySelector(`option[value=${this.urgency}`)
         .setAttribute("selected", "");
+      visit.createBtn.classList.add("update");
       visit.createBtn.innerHTML = "Update";
     }
 
     if (this.doctor == "Therapist") {
       const visit = new VisitTherapist();
       visit.render();
+      visit.element.setAttribute("id", this.id);
       visit.name.querySelector("input").value = this.name;
       visit.target.querySelector("input").value = this.target;
       visit.description.querySelector("textarea").value = this.description;
@@ -164,11 +169,19 @@ class Card extends Element {
         .querySelector("select")
         .querySelector(`option[value=${this.urgency}`)
         .setAttribute("selected", "");
+      visit.createBtn.classList.add("update");
       visit.createBtn.innerHTML = "Update";
     }
   }
   deleteListener() {
-    console.log("hello");
+    fetch(`https://ajax.test-danit.com/api/v2/cards/${this.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(() => {
+      this.element.remove();
+    });
   }
 }
 

@@ -1,12 +1,10 @@
-import Input from './classInput.js';
-import Label from './classLabel.js';
-import Select from './classSelect.js';
-import Button from './classButton.js';
-import Modal from './classModal.js';
-import Element from './classEL.js';
-import FilterEl from './classFilter.js';
-
-const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
+import Input from "./classInput.js";
+import Label from "./classLabel.js";
+import Select from "./classSelect.js";
+import Button from "./classButton.js";
+import Modal from "./classModal.js";
+import Element from "./classEL.js";
+import FilterEl from "./classFilter.js";
 
 class Visit extends FilterEl {
   constructor() {
@@ -22,8 +20,13 @@ class Visit extends FilterEl {
   }
   render() {
     document.body.prepend(this.element);
-    this.closeBtn.addEventListener('click', this.handleCloseClick.bind(this));
-    this.createBtn.addEventListener('click', this.handleCreateClick.bind(this));
+    this.closeBtn.addEventListener("click", this.handleCloseClick.bind(this));
+    if (this.handleCreateClick) {
+      this.createBtn.addEventListener(
+        "click",
+        this.handleCreateClick.bind(this)
+      );
+    }
   }
 
   createModal() {
@@ -40,8 +43,8 @@ class Visit extends FilterEl {
   //Добавил что бы подвязать событие
   labelDoctor() {
     this.labelDoctor = this.renderLabelEl(
-      ['label', 'd-block'],
-      'Select doctor'
+      ["label", "d-block"],
+      "Select doctor"
     );
     this.labelDoctor.append(this.selectDoctor());
     return this.labelDoctor;
@@ -49,82 +52,61 @@ class Visit extends FilterEl {
 
   //Добавил что бы подвязать событие
   selectDoctor() {
-    this.selectDoctor = this.renderLabelChildren('select-doctor');
-    this.selectDoctor.append(this.renderOptionEl('Cardiologist'));
-    this.selectDoctor.append(this.renderOptionEl('Dentist'));
-    this.selectDoctor.append(this.renderOptionEl('Therapist'));
+    this.selectDoctor = this.renderLabelChildren("select-doctor");
+    this.selectDoctor.append(this.renderOptionEl("Cardiologist"));
+    this.selectDoctor.append(this.renderOptionEl("Dentist"));
+    this.selectDoctor.append(this.renderOptionEl("Therapist"));
     return this.selectDoctor;
   }
 
   nameInput() {
-    const nameInput = new Input(['input'], '');
-    return new Label(['label', 'd-block'], `Name`, nameInput.create());
+    const nameInput = new Input(["input"], "");
+    return new Label(["label", "d-block"], `Name`, nameInput.create());
   }
 
   // тут тоже
   selectUrgency() {
     this.labelUrgency = this.renderLabelEl(
-      ['label', 'd-block'],
-      'Select urgency'
+      ["label", "d-block"],
+      "Select urgency"
     );
-    this.selectUrgency = this.renderLabelChildren('');
-    this.selectUrgency.append(this.renderOptionEl('High'));
-    this.selectUrgency.append(this.renderOptionEl('Normal'));
-    this.selectUrgency.append(this.renderOptionEl('Low'));
+    this.selectUrgency = this.renderLabelChildren("");
+    this.selectUrgency.append(this.renderOptionEl("High"));
+    this.selectUrgency.append(this.renderOptionEl("Normal"));
+    this.selectUrgency.append(this.renderOptionEl("Low"));
     this.labelUrgency.append(this.selectUrgency);
     return this.labelUrgency;
   }
 
   targetInput() {
-    const targetInput = new Input(['input'], '');
-    return new Label(['label', 'd-block'], `Target`, targetInput.create());
+    const targetInput = new Input(["input"], "");
+    return new Label(["label", "d-block"], `Target`, targetInput.create());
   }
 
   descriptionInput() {
     const descriptionInput = new Element();
     return new Label(
-      ['label', 'd-block'],
+      ["label", "d-block"],
       `Descrition`,
       descriptionInput.createElement(
-        'textarea',
-        ['textarea'],
+        "textarea",
+        ["textarea"],
         {
-          cols: '30',
-          rows: '10',
+          cols: "30",
+          rows: "10",
         },
-        ''
+        ""
       )
     );
   }
   createButton() {
-    return new Button(['button'], 'create-button', 'Create');
+    return new Button(["button"], "create-button", "Create");
   }
   closeBtn() {
-    return new Button(['close-button'], 'close-button', 'x');
+    return new Button(["close-button"], "close-button", "x");
   }
   handleCloseClick() {
     this.element.remove();
-  }
-  async handleCreateClick() {
-    let response = await fetch('https://ajax.test-danit.com/api/v2/cards', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        name: `${this.name.value}`,
-        description: `${this.description.value}`,
-        doctor: `${this.doctor.value}`,
-        urgency: `${this.urgency.value}`,
-        target: `${this.target.value}`,
-      }),
-    });
-    response = response.json();
-    console.log(response);
-    this.element.remove();
-    // const card = new Card();
-    // card.render();
   }
 }
 
