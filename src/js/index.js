@@ -13,13 +13,13 @@ import VisitCardiologist from './class/classVisitCardiologist';
 import VisitTherapist from './class/classVisitTherapist';
 import getLogin from './fetch/getUserToken.js';
 import logInBtn from './listener/headerListener';
-
+import visitListener from './listener/visitListener.js';
 function createHtml() {
   const body = document.body;
   const container = new Element();
   const containerEl = container.createElement('div', ['container']);
-
   const headerEl = new ElementHeader();
+
   const filterEl = new FilterEl();
   containerEl.append(headerEl.render(), filterEl.render());
   return body.append(containerEl);
@@ -28,19 +28,7 @@ function createHtml() {
 createHtml();
 
 // const visit = new Visit();
-// visit.render()
-
-// document.querySelector('#select-doctor-card').addEventListener('change', () => {
-//   const value = document.querySelector('#select-doctor-card').value;
-//   console.log(value);
-//   if (value === 'Cardiologist') {
-//     document.querySelector('.modal').remove();
-//     visitCardiologist.render();
-//   } else if (value == 'Dentist') {
-//     document.querySelector('.modal').remove();
-//     visitDentist.render();
-//   } else if (value == 'Therapist') {
-//     document.querySelector('.modal').remove();
-//     visitTherapist.render();
-//   }
-// });
+// const visitCardiologist = new VisitCardiologist();
+// const visitDentist = new VisitDentist();
+// const visitTherapist = new VisitTherapist();
+// visit.render();

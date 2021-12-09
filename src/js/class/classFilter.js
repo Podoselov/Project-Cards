@@ -8,12 +8,12 @@ class FilterEl extends Element {
   }
 
   renderLabelEl(classLabel, textLabel) {
-    this.labelFilterEl = new Label([classLabel], textLabel, '');
+    this.labelFilterEl = new Label(classLabel, textLabel, '');
     return this.labelFilterEl.create();
   }
 
-  renderLabelChildren() {
-    this.selectFilterEL = new Select('selectFilter');
+  renderLabelChildren(idElSelect) {
+    this.selectFilterEL = new Select(idElSelect);
     return this.selectFilterEL.create();
   }
 
@@ -21,7 +21,7 @@ class FilterEl extends Element {
     return (this.optionEl = this.createElement(
       'option',
       ['option'],
-      { value: '' },
+      { value: text },
       text
     ));
   }
@@ -34,13 +34,13 @@ class FilterEl extends Element {
     this.label1.append(this.inputFilterEl1.create());
 
     this.label2 = this.renderLabelEl(['label'], 'Status');
-    this.select1 = this.renderLabelChildren();
+    this.select1 = this.renderLabelChildren('selectFilter');
     this.select1.append(this.renderOptionEl('Open'));
     this.select1.append(this.renderOptionEl('Done'));
     this.label2.append(this.select1);
 
     this.label3 = this.renderLabelEl(['label'], 'Urgency');
-    this.select2 = this.renderLabelChildren();
+    this.select2 = this.renderLabelChildren('selectFilter');
     this.select2.append(this.renderOptionEl('High'));
     this.select2.append(this.renderOptionEl('Normal'));
     this.select2.append(this.renderOptionEl('Low'));

@@ -1,7 +1,7 @@
-import Input from "./classInput.js";
-import Label from "./classLabel.js";
-import Modal from "./classModal.js";
-import Visit from "./classVisit.js";
+import Input from './classInput.js';
+import Label from './classLabel.js';
+import Modal from './classModal.js';
+import Visit from './classVisit.js';
 
 class VisitDentist extends Visit {
   constructor() {
@@ -22,8 +22,8 @@ class VisitDentist extends Visit {
     ]);
   }
   lastVisitInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Last visit date`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Last visit date`, input.create());
   }
 }
 

@@ -1,7 +1,9 @@
 import Element from './classEL.js';
 import Button from './classButton.js';
 import Login from './classLogin.js';
-import Visit from './classVisit.js';
+import VisitCardiologist from './classVisitCardiologist.js';
+import visitListener from '../listener/visitListener.js';
+
 class ElementHeader extends Element {
   constructor() {
     super();
@@ -51,8 +53,8 @@ class ElementHeader extends Element {
   newBtnClick(btnEl) {
     btnEl.addEventListener('click', (e) => {
       e.preventDefault();
-      const visitModal = new Visit();
-      visitModal.render();
+      this.visitModalCardiol = new VisitCardiologist();
+      this.visitModalCardiol.render();
     });
   }
 }

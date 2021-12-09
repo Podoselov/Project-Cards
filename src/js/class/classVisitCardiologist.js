@@ -1,7 +1,7 @@
-import Visit from "./classVisit.js";
-import Input from "./classInput.js";
-import Label from "./classLabel.js";
-import Modal from "./classModal.js";
+import Visit from './classVisit.js';
+import Input from './classInput.js';
+import Label from './classLabel.js';
+import Modal from './classModal.js';
 
 class VisitCardiologist extends Visit {
   constructor() {
@@ -27,21 +27,22 @@ class VisitCardiologist extends Visit {
       this.closeBtn,
     ]);
   }
+
   pressureInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Pressure`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Pressure`, input.create());
   }
   BMI() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `BMI`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `BMI`, input.create());
   }
   deseasesInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Deseases`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Deseases`, input.create());
   }
   ageInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Age`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Age`, input.create());
   }
 }
 

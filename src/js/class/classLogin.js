@@ -14,8 +14,15 @@ class Login {
     this.element = this.createModal().create();
     this.btnHeader = document.querySelector('.header__button');
     this.newBtnHeader = document.querySelector('.header__button-new');
+    this.localEmail = localStorage.getItem('email');
+    this.localPassword = localStorage.getItem('password');
   }
   render() {
+    window.onload = () => {
+      this.email.firstElementChild.value = localStorage.getItem('email');
+      this.password.firstElementChild.value = localStorage.getItem('password');
+    };
+    onload();
     document.body.prepend(this.element);
     this.closeBtn.addEventListener('click', this.handleCloseClick.bind(this));
     this.loginBtn.addEventListener('click', this.handleLoginClick.bind(this));
@@ -23,7 +30,7 @@ class Login {
   createModal() {
     return new Modal([this.email, this.password, this.loginBtn, this.closeBtn]);
   }
-  //Тут добавил при закрытии что бы не оставались плейсхолдеры при вовторном нажатии
+
   handleCloseClick() {
     this.email.firstElementChild.value = '';
     this.password.firstElementChild.value = '';
@@ -42,17 +49,19 @@ class Login {
   closeBtn() {
     return new Button(['close-button'], 'close-button', 'x');
   }
-  //тут класс добавил
+
   loginBtn() {
     return new Button(['button', 'login-button'], 'login-button', 'Log in');
   }
-  //Добавил с логином взаимодействие
+
   async handleLoginClick(btnRemoveEl) {
     const tokenValue = await getLogin(
       this.email.firstElementChild.value,
       this.password.firstElementChild.value
     );
     if (tokenValue === `6437b668-8958-4db2-9491-e121b2a4c327`) {
+      localStorage.setItem('email', this.email.firstElementChild.value);
+      localStorage.setItem('password', this.password.firstElementChild.value);
       this.email.firstElementChild.value = '';
       this.password.firstElementChild.value = '';
       this.handleCloseClick();
