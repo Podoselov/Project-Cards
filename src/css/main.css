@@ -9,6 +9,7 @@ body {
   box-sizing: border-box;
   max-width: 1200px;
 }
+
 .page__header {
   display: flex;
   align-items: center;

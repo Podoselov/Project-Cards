@@ -6,7 +6,6 @@ import Card from './classCard';
 import selectDoctorListener from '../listener/visitListener.js';
 import postVisitFetch from '../fetch/postVisitFetch.js';
 import putVisitCard from '../fetch/putVisitCard.js';
-
 import token from '../fetch/token.js';
 
 class VisitDentist extends Visit {

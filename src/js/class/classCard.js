@@ -47,13 +47,19 @@ class Card extends Element {
     this.deleteBtn.addEventListener('click', this.deleteListener.bind(this));
   }
   create() {
-    this.element = this.createElement('div', ['cards-item'], {
-      id: `card-${this.id}`,
-    });
+    this.containerEl = document.querySelector('.cards-container');
+    this.element = this.createElement(
+      'div',
+      ['cards-item', this.urgency.toLowerCase()],
+      {
+        id: `card-${this.id}`,
+      }
+    );
     this.element.innerHTML = `<p class="cards-item-text">Name: ${this.name}</p><p class="cards-item-text">Doctor: ${this.doctor}</p>`;
     this.element.append(this.showMoreBtn, this.editBtn, this.deleteBtn);
-    document.body.append(this.element);
+    return this.containerEl.append(this.element);
   }
+
   deleteBtn() {
     return new Button(['close-button'], 'close-button', 'x');
   }

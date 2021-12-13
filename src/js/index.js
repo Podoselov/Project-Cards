@@ -13,9 +13,14 @@ function createHtml() {
   const containerEl = container.createElement('div', ['container']);
   const headerEl = new ElementHeader();
   const filterEl = new FilterEl();
+  const containerCardEl = container.createElement('div', [
+    'cards-container',
+    'container',
+  ]);
+
   containerEl.append(headerEl.render(), filterEl.render());
 
-  return body.append(containerEl);
+  return body.append(containerEl, containerCardEl);
 }
 
 createHtml();
