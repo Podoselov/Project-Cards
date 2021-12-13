@@ -3,8 +3,9 @@ import Label from './classLabel.js';
 import Button from './classButton.js';
 import Modal from './classModal.js';
 import getLogin from '../fetch/getUserToken.js';
-import ElementHeader from '../class/classHeader.js';
-
+import token from '../fetch/token.js';
+import Card from './classCard.js';
+import getCards from '../fetch/getCards.js';
 class Login {
   constructor() {
     this.closeBtn = this.closeBtn().create();
@@ -59,7 +60,7 @@ class Login {
       this.email.firstElementChild.value,
       this.password.firstElementChild.value
     );
-    if (tokenValue === `6437b668-8958-4db2-9491-e121b2a4c327`) {
+    if (tokenValue === token) {
       localStorage.setItem('email', this.email.firstElementChild.value);
       localStorage.setItem('password', this.password.firstElementChild.value);
       this.email.firstElementChild.value = '';
@@ -67,6 +68,11 @@ class Login {
       this.handleCloseClick();
       this.btnHeader.classList.add('d-none');
       this.newBtnHeader.classList.remove('d-none');
+      this.cardEl = await getCards(token);
+      this.cardEl.forEach((el) => {
+        const card = new Card(el);
+        card.render();
+      });
     } else {
       this.email.firstElementChild.value = '';
       this.password.firstElementChild.value = '';
