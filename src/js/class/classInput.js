@@ -1,22 +1,25 @@
 import Element from './classEL.js';
 
 class Input extends Element {
-  constructor(classes, id) {
+  constructor(classes, id, name) {
     super();
     this.classes = classes;
     this.id = id;
+    this.name = name;
   }
   create() {
     this.createElement(
-      "input",
+      'input',
       this.classes,
       {
         id: this.id,
-        type: "text",
+        type: 'text',
+        name: this.name,
+        required: '',
       },
-      ""
-    )
-     return this.element;
+      ''
+    );
+    return this.element;
   }
 }
 

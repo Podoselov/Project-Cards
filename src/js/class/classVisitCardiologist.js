@@ -1,10 +1,12 @@
-import Visit from "./classVisit.js";
-import Input from "./classInput.js";
-import Label from "./classLabel.js";
-import Modal from "./classModal.js";
-import Card from "./classCard";
-
-const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
+import Visit from './classVisit.js';
+import Input from './classInput.js';
+import Label from './classLabel.js';
+import Modal from './classModal.js';
+import Card from './classCard.js';
+import selectDoctorListener from '../listener/visitListener.js';
+import postVisitFetch from '../fetch/postVisitFetch.js';
+import putVisitCard from '../fetch/putVisitCard.js';
+import token from '../fetch/token.js';
 class VisitCardiologist extends Visit {
   constructor() {
     super();
@@ -29,86 +31,78 @@ class VisitCardiologist extends Visit {
       this.closeBtn,
     ]);
     this.doctor
-      .querySelector("select")
+      .querySelector('select')
       .querySelector(`option[value='Cardiologist'`)
-      .setAttribute("selected", "");
+      .setAttribute('selected', '');
+    this.doctor.addEventListener('change', (e) => {
+      selectDoctorListener(e);
+    });
     return modal;
   }
 
   pressureInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Pressure`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Pressure`, input.create());
   }
   BMI() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `BMI`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `BMI`, input.create());
   }
   deseasesInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Deseases`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Deseases`, input.create());
   }
   ageInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Age`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Age`, input.create());
   }
   handleCreateClick() {
-    if (this.createBtn.classList.contains("update")) {
+    if (this.createBtn.classList.contains('update')) {
       this.upgradeCard();
     } else {
       this.createCard();
     }
   }
-  upgradeCard() {
-    console.log("upgrade");
-    fetch(`https://ajax.test-danit.com/api/v2/cards/${this.element.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        id: `${this.element.id}`,
-        name: `${this.name.querySelector("input").value}`,
-        description: `${this.description.querySelector("textarea").value}`,
-        doctor: `${this.doctor.querySelector("select").value}`,
-        urgency: `${this.urgency.querySelector("select").value}`,
-        pressure: `${this.pressure.querySelector("input").value}`,
-        age: `${this.age.querySelector("input").value}`,
-        BMI: `${this.BMI.querySelector("input").value}`,
-        deseases: `${this.deseases.querySelector("input").value}`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        document.getElementById(`card-${this.element.id}`).remove();
-        const card = new Card(response);
-        card.render();
-      });
-    this.element.remove();
+
+  setPostObj() {
+    return {
+      name: `${this.name.querySelector('input').value}`,
+      description: `${this.description.querySelector('textarea').value}`,
+      doctor: `${this.doctor.querySelector('select').value}`,
+      urgency: `${this.urgency.querySelector('select').value}`,
+      pressure: `${this.pressure.querySelector('input').value}`,
+      age: `${this.age.querySelector('input').value}`,
+      BMI: `${this.BMI.querySelector('input').value}`,
+      deseases: `${this.deseases.querySelector('input').value}`,
+      target: `${this.target.querySelector('input').value}`,
+    };
   }
-  createCard() {
-    fetch("https://ajax.test-danit.com/api/v2/cards", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        name: `${this.name.querySelector("input").value}`,
-        description: `${this.description.querySelector("textarea").value}`,
-        doctor: `${this.doctor.querySelector("select").value}`,
-        urgency: `${this.urgency.querySelector("select").value}`,
-        pressure: `${this.pressure.querySelector("input").value}`,
-        age: `${this.age.querySelector("input").value}`,
-        BMI: `${this.BMI.querySelector("input").value}`,
-        deseases: `${this.deseases.querySelector("input").value}`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        const card = new Card(response);
-        card.render();
-      });
+
+  async createCard() {
+    if (
+      this.name.querySelector('input').value !== '' &&
+      this.pressure.querySelector('input').value !== '' &&
+      this.BMI.querySelector('input').value !== '' &&
+      this.deseases.querySelector('input').value !== '' &&
+      this.age.querySelector('input').value !== '' &&
+      this.target.querySelector('input').value !== ''
+    ) {
+      const response = await postVisitFetch(this.setPostObj(), token);
+      const card = new Card(await response);
+      card.render();
+      this.element.remove();
+    }
+  }
+
+  async upgradeCard() {
+    const response = await putVisitCard(
+      this.element.id,
+      this.setPostObj(),
+      token
+    );
+    document.getElementById(`card-${this.element.id}`).remove();
+    const card = new Card(await response);
+    card.render();
     this.element.remove();
   }
 }

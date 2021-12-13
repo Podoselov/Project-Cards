@@ -1,25 +1,22 @@
-import visitCardiologist from '../class/classVisitCardiologist.js';
-import visitDentist from '../class/classVisitDentist.js';
-import visitTherapist from '../class/classVisitTherapist.js';
+import visitCardiologist from '../class/classVisitCardiologist';
+import visitDentist from '../class/classVisitDentist';
+import visitTherapist from '../class/classVisitTherapist';
 
-const changeVisitModal = () => {
-  const selectEl = document.querySelector('#select-doctor');
-  const modal = document.querySelector('.modal');
-  selectEl.addEventListener('change', (e) => {
-    if (e.target.value === 'Cardiologist') {
-      modal.remove();
-      const cardiologist = new visitCardiologist();
-      cardiologist.render();
-    } else if (e.target.value == 'Dentist') {
-      modal.remove();
-      const dentist = new visitDentist();
-      dentist.render();
-    } else if (e.target.value == 'Therapist') {
-      modal.remove();
-      const therapist = new visitTherapist();
-      therapist.render();
-    }
-  });
+const selectDoctorListener = (e) => {
+  const modalEl = document.querySelector('.modal');
+  if (e.target.value === 'Cardiologist') {
+    modalEl.remove();
+    const modalCardiologist = new visitCardiologist();
+    modalCardiologist.render();
+  } else if (e.target.value == 'Dentist') {
+    modalEl.remove();
+    const modalDentist = new visitDentist();
+    modalDentist.render();
+  } else if (e.target.value == 'Therapist') {
+    modalEl.remove();
+    const modalTherapist = new visitTherapist();
+    modalTherapist.render();
+  }
 };
 
-export default changeVisitModal;
+export default selectDoctorListener;

@@ -8,7 +8,7 @@ class Button extends Element {
     this.text = text;
   }
   create() {
-    this.createElement(
+    this.element = this.createElement(
       'button',
       this.classes,
       {
@@ -16,6 +16,9 @@ class Button extends Element {
       },
       this.text
     );
+    this.element.addEventListener('click', (e) => {
+      e.preventDefault();
+    });
     return this.element;
   }
 }

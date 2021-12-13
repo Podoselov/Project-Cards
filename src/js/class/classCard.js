@@ -1,8 +1,8 @@
-import Button from "./classButton.js";
-import Element from "./classEL.js";
-import VisitDentist from "./classVisitDentist";
-import VisitCardiologist from "./classVisitCardiologist";
-import VisitTherapist from "./classVisitTherapist";
+import Button from './classButton.js';
+import Element from './classEL.js';
+import VisitDentist from './classVisitDentist.js';
+import VisitCardiologist from './classVisitCardiologist.js';
+import VisitTherapist from './classVisitTherapist.js';
 
 const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
 class Card extends Element {
@@ -40,14 +40,14 @@ class Card extends Element {
   render() {
     this.create();
     this.showMoreBtn.addEventListener(
-      "click",
+      'click',
       this.showMoreListener.bind(this)
     );
-    this.editBtn.addEventListener("click", this.editListener.bind(this));
-    this.deleteBtn.addEventListener("click", this.deleteListener.bind(this));
+    this.editBtn.addEventListener('click', this.editListener.bind(this));
+    this.deleteBtn.addEventListener('click', this.deleteListener.bind(this));
   }
   create() {
-    this.element = this.createElement("div", ["cards-item"], {
+    this.element = this.createElement('div', ['cards-item'], {
       id: `card-${this.id}`,
     });
     this.element.innerHTML = `<p class="cards-item-text">Name: ${this.name}</p><p class="cards-item-text">Doctor: ${this.doctor}</p>`;
@@ -55,127 +55,127 @@ class Card extends Element {
     document.body.append(this.element);
   }
   deleteBtn() {
-    return new Button(["close-button"], "close-button", "x");
+    return new Button(['close-button'], 'close-button', 'x');
   }
   showMoreBtn() {
     return new Button(
-      ["button", "cards-button"],
-      "show-more-button",
-      "Show more"
+      ['button', 'cards-button'],
+      'show-more-button',
+      'Show more'
     );
   }
   editBtn() {
-    return new Button(["button", "cards-button"], "edit-button", "Edit");
+    return new Button(['button', 'cards-button'], 'edit-button', 'Edit');
   }
   showMoreListener() {
     this.showMoreBtn.remove();
     const urgency = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Urgency: ${this.urgency}`
     );
     const deseases = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Deseases: ${this.deseases}`
     );
     const target = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Target: ${this.target}`
     );
     const description = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Description: ${this.description}`
     );
     const pressure = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `pressure: ${this.pressure}`
     );
     const age = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Age: ${this.age}`
     );
     const lastVisit = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Last visit: ${this.lastVisit}`
     );
     this.editBtn.before(urgency, target, description);
-    if (this.doctor == "Cardiologist") {
+    if (this.doctor == 'Cardiologist') {
       this.editBtn.before(pressure, deseases, age);
     }
-    if (this.doctor == "Dentist") {
+    if (this.doctor == 'Dentist') {
       this.editBtn.before(lastVisit);
     }
-    if (this.doctor == "Therapist") {
-      this.editBtn.before(this.age);
+    if (this.doctor == 'Therapist') {
+      this.editBtn.before(age);
     }
   }
   editListener() {
-    if (this.doctor == "Cardiologist") {
+    if (this.doctor == 'Cardiologist') {
       const visit = new VisitCardiologist();
       visit.render();
-      visit.element.setAttribute("id", this.id);
-      visit.name.querySelector("input").value = this.name;
-      visit.target.querySelector("input").value = this.target;
-      visit.description.querySelector("textarea").value = this.description;
-      visit.age.querySelector("input").value = this.age;
-      visit.BMI.querySelector("input").value = this.BMI;
-      visit.deseases.querySelector("input").value = this.deseases;
-      visit.pressure.querySelector("input").value = this.pressure;
+      visit.element.setAttribute('id', this.id);
+      visit.name.querySelector('input').value = this.name;
+      visit.target.querySelector('input').value = this.target;
+      visit.description.querySelector('textarea').value = this.description;
+      visit.age.querySelector('input').value = this.age;
+      visit.BMI.querySelector('input').value = this.BMI;
+      visit.deseases.querySelector('input').value = this.deseases;
+      visit.pressure.querySelector('input').value = this.pressure;
       visit.urgency
-        .querySelector("select")
+        .querySelector('select')
         .querySelector(`option[value=${this.urgency}`)
-        .setAttribute("selected", "");
-      visit.createBtn.classList.add("update");
-      visit.createBtn.innerHTML = "Update";
+        .setAttribute('selected', '');
+      visit.createBtn.classList.add('update');
+      visit.createBtn.innerHTML = 'Update';
     }
-    if (this.doctor == "Dentist") {
+    if (this.doctor == 'Dentist') {
       const visit = new VisitDentist();
       visit.render();
-      visit.element.setAttribute("id", this.id);
-      visit.name.querySelector("input").value = this.name;
-      visit.target.querySelector("input").value = this.target;
-      visit.description.querySelector("textarea").value = this.description;
-      visit.lastVisit.querySelector("input").value = this.lastVisit;
+      visit.element.setAttribute('id', this.id);
+      visit.name.querySelector('input').value = this.name;
+      visit.target.querySelector('input').value = this.target;
+      visit.description.querySelector('textarea').value = this.description;
+      visit.lastVisit.querySelector('input').value = this.lastVisit;
       visit.urgency
-        .querySelector("select")
+        .querySelector('select')
         .querySelector(`option[value=${this.urgency}`)
-        .setAttribute("selected", "");
-      visit.createBtn.classList.add("update");
-      visit.createBtn.innerHTML = "Update";
+        .setAttribute('selected', '');
+      visit.createBtn.classList.add('update');
+      visit.createBtn.innerHTML = 'Update';
     }
 
-    if (this.doctor == "Therapist") {
+    if (this.doctor == 'Therapist') {
       const visit = new VisitTherapist();
       visit.render();
-      visit.element.setAttribute("id", this.id);
-      visit.name.querySelector("input").value = this.name;
-      visit.target.querySelector("input").value = this.target;
-      visit.description.querySelector("textarea").value = this.description;
-      visit.age.querySelector("input").value = this.age;
+      visit.element.setAttribute('id', this.id);
+      visit.name.querySelector('input').value = this.name;
+      visit.target.querySelector('input').value = this.target;
+      visit.description.querySelector('textarea').value = this.description;
+      visit.age.querySelector('input').value = this.age;
       visit.urgency
-        .querySelector("select")
+        .querySelector('select')
         .querySelector(`option[value=${this.urgency}`)
-        .setAttribute("selected", "");
-      visit.createBtn.classList.add("update");
-      visit.createBtn.innerHTML = "Update";
+        .setAttribute('selected', '');
+      visit.createBtn.classList.add('update');
+      visit.createBtn.innerHTML = 'Update';
     }
   }
   deleteListener() {
     fetch(`https://ajax.test-danit.com/api/v2/cards/${this.id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
       },

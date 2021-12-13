@@ -1,10 +1,13 @@
-import Input from "./classInput.js";
-import Label from "./classLabel.js";
-import Modal from "./classModal.js";
-import Visit from "./classVisit.js";
-import Card from "./classCard";
+import Input from './classInput';
+import Label from './classLabel';
+import Modal from './classModal';
+import Visit from './classVisit';
+import Card from './classCard';
+import selectDoctorListener from '../listener/visitListener.js';
+import postVisitFetch from '../fetch/postVisitFetch.js';
+import putVisitCard from '../fetch/putVisitCard.js';
 
-const token = `6437b668-8958-4db2-9491-e121b2a4c327`;
+import token from '../fetch/token.js';
 
 class VisitDentist extends Visit {
   constructor() {
@@ -24,67 +27,61 @@ class VisitDentist extends Visit {
       this.closeBtn,
     ]);
     this.doctor
-      .querySelector("select")
+      .querySelector('select')
       .querySelector(`option[value='Dentist'`)
-      .setAttribute("selected", "");
+      .setAttribute('selected', '');
+    this.doctor.addEventListener('change', (e) => {
+      selectDoctorListener(e);
+    });
     return modal;
   }
+
   lastVisitInput() {
-    const input = new Input(["input"], "");
-    return new Label(["label", "d-block"], `Last visit date`, input.create());
+    const input = new Input(['input'], '');
+    return new Label(['label', 'd-block'], `Last visit date`, input.create());
   }
+
   handleCreateClick() {
-    if (this.createBtn.classList.contains("update")) {
+    if (this.createBtn.classList.contains('update')) {
       this.upgradeCard();
     } else {
       this.createCard();
     }
   }
-  upgradeCard() {
-    console.log("upgrade");
-    fetch(`https://ajax.test-danit.com/api/v2/cards/${this.element.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        id: `${this.element.id}`,
-        name: `${this.name.querySelector("input").value}`,
-        description: `${this.description.querySelector("textarea").value}`,
-        doctor: `${this.doctor.querySelector("select").value}`,
-        urgency: `${this.urgency.querySelector("select").value}`,
-        lastVisit: `${this.lastVisit.querySelector("input").value}`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        document.getElementById(`card-${this.element.id}`).remove();
-        const card = new Card(response);
-        card.render();
-      });
-    this.element.remove();
+
+  setPostObj() {
+    return {
+      name: `${this.name.querySelector('input').value}`,
+      description: `${this.description.querySelector('textarea').value}`,
+      doctor: `${this.doctor.querySelector('select').value}`,
+      urgency: `${this.urgency.querySelector('select').value}`,
+      lastVisit: `${this.lastVisit.querySelector('input').value}`,
+      target: `${this.target.querySelector('input').value}`,
+    };
   }
-  createCard() {
-    fetch("https://ajax.test-danit.com/api/v2/cards", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        name: `${this.name.querySelector("input").value}`,
-        description: `${this.description.querySelector("textarea").value}`,
-        doctor: `${this.doctor.querySelector("select").value}`,
-        urgency: `${this.urgency.querySelector("select").value}`,
-        lastVisit: `${this.lastVisit.querySelector("input").value}`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        const card = new Card(response);
-        card.render();
-      });
+
+  async createCard() {
+    if (
+      this.lastVisit.querySelector('input').value !== '' &&
+      this.target.querySelector('input').value !== '' &&
+      this.name.querySelector('input').value !== ''
+    ) {
+      const response = await postVisitFetch(this.setPostObj(), token);
+      const card = new Card(await response);
+      card.render();
+      this.element.remove();
+    }
+  }
+
+  async upgradeCard() {
+    const response = await putVisitCard(
+      this.element.id,
+      this.setPostObj(),
+      token
+    );
+    document.getElementById(`card-${this.element.id}`).remove();
+    const card = new Card(await response);
+    card.render();
     this.element.remove();
   }
 }
