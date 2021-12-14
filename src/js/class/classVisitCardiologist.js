@@ -87,6 +87,9 @@ class VisitCardiologist extends Visit {
       this.age.querySelector('input').value !== '' &&
       this.target.querySelector('input').value !== ''
     ) {
+      if (document.querySelector(".no-items")) {
+        document.querySelector(".no-items").remove();
+      }
       const response = await postVisitFetch(this.setPostObj(), token);
       const card = new Card(await response);
       card.render();

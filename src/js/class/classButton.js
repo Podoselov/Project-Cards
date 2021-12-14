@@ -9,10 +9,11 @@ class Button extends Element {
   }
   create() {
     this.element = this.createElement(
-      'button',
+      "button",
       this.classes,
       {
         id: this.id,
+        type: "submit",
       },
       this.text
     );

@@ -69,10 +69,13 @@ class Login {
       this.btnHeader.classList.add('d-none');
       this.newBtnHeader.classList.remove('d-none');
       this.cardEl = await getCards(token);
-      this.cardEl.forEach((el) => {
-        const card = new Card(el);
-        card.render();
-      });
+      if (this.cardEl.length !== 0) {
+         document.querySelector(".cards-container").innerHTML = "";
+        this.cardEl.forEach((el) => {
+          const card = new Card(el);
+          card.render();
+        });
+      }
     } else {
       this.email.firstElementChild.value = '';
       this.password.firstElementChild.value = '';
