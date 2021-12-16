@@ -2,9 +2,6 @@ import Element from './classEL.js';
 import Label from './classLabel.js';
 import Input from './classInput.js';
 import Select from './classSelect.js';
-import filterText from '../listener/filterListener.js';
-import getCards from '../fetch/getCards.js';
-import token from '../fetch/token.js';
 
 class FilterEl extends Element {
   constructor() {
@@ -37,11 +34,13 @@ class FilterEl extends Element {
     this.inputEl = this.inputFilterEl1.create();
     this.inputEl.addEventListener('input', () => {
       this.cardEl = document.querySelectorAll('.cards-item');
-      this.containerEl = document.querySelector('.cards-container');
       Array.from(this.cardEl).forEach((el) => {
-        const name = el.firstChild.textContent.slice(5);
-        if (name.toLowerCase().includes(this.inputEl.value.toLowerCase())) {
-          this.containerEl.prepend(el);
+        const nameEl = el.querySelector('.cards-item-text-name');
+        const name = nameEl.textContent.slice(6);
+        if (!name.toLowerCase().includes(this.inputEl.value.toLowerCase())) {
+          el.classList.add('d-none');
+        } else {
+          el.classList.remove('d-none');
         }
       });
     });
@@ -60,10 +59,11 @@ class FilterEl extends Element {
     this.select2.append(this.renderOptionEl('Low'));
     this.select2.addEventListener('change', (e) => {
       this.cardEl = document.querySelectorAll('.cards-item');
-      this.containerEl = document.querySelector('.cards-container');
       Array.from(this.cardEl).forEach((el) => {
-        if (el.classList.contains(e.target.value.toLowerCase())) {
-          this.containerEl.prepend(el);
+        if (!el.classList.contains(e.target.value.toLowerCase())) {
+          el.classList.add('d-none');
+        } else {
+          el.classList.remove('d-none');
         }
       });
     });

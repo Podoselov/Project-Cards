@@ -1,14 +1,13 @@
 ('use strict');
-
+import '../css/reset.css';
 import '../css/main.css';
 import '../img/logo.png';
-import '../css/reset.css';
 import Element from './class/classEL.js';
 import ElementHeader from './class/classHeader.js';
 import FilterEl from './class/classFilter.js';
-import token from "./fetch/token";
-import Card from "./class/classCard";
-import getCards from "./fetch/getCards";
+import token from './fetch/token';
+import Card from './class/classCard';
+import getCards from './fetch/getCards';
 
 function createHtml() {
   const body = document.body;
@@ -17,8 +16,8 @@ function createHtml() {
   const headerEl = new ElementHeader();
   const filterEl = new FilterEl();
   const containerCardEl = container.createElement(
-    "div",
-    ["cards-container", "container"],
+    'div',
+    ['cards-container', 'container'],
     {},
     '<p class="no-items">No items have beed added</p>'
   );
@@ -29,23 +28,21 @@ function createHtml() {
 }
 
 async function createLoginHTML() {
-createHtml();
-  document.querySelector('.header__button').classList.add('d-none')
-  document.querySelector(".header__button-new").classList.remove("d-none");
+  createHtml();
+  document.querySelector('.header__button').classList.add('d-none');
+  document.querySelector('.header__button-new').classList.remove('d-none');
   const cards = await getCards(token);
   if (cards.length !== 0) {
-      document.querySelector(".cards-container").innerHTML = "";
-  cards.forEach((el) => {
-    const card = new Card(el);
-    card.render();
-  });
+    document.querySelector('.cards-container').innerHTML = '';
+    cards.forEach((el) => {
+      const card = new Card(el);
+      card.render();
+    });
   }
-
 }
 
-if (localStorage.getItem("email")) {
-createLoginHTML();
-
+if (localStorage.getItem('email')) {
+  createLoginHTML();
 } else {
   createHtml();
 }
