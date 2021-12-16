@@ -107,7 +107,7 @@ body {
   transform: translateY(-50%);
   margin: auto;
   padding: 40px;
-  width: 30%;
+  width: 35%;
   text-align: left;
   position: relative;
   text-align: left;
@@ -142,8 +142,6 @@ body {
 
 .done-button {
   position: absolute;
-  font-size: 28px;
-  font-weight: bold;
   width: 25px;
   height: 25px;
   top: 19px;
