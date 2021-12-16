@@ -140,6 +140,17 @@ body {
   background-color: transparent;
 }
 
+.done-button {
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  width: 25px;
+  height: 25px;
+  top: 19px;
+  right: 50px;
+  cursor: pointer;
+}
+
 .cards-button {
   background-color: #aaa;
   width: 100%;
@@ -170,6 +181,10 @@ body {
   border-radius: 15px;
   padding: 20px;
   position: relative;
+}
+
+.cards-item.done {
+  color: #aaa;
 }
 
 .cards-item-text {
