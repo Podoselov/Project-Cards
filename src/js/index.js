@@ -47,14 +47,3 @@ if (localStorage.getItem('email')) {
   createHtml();
 }
 
-// document.onclick = function (event) {
-//   if (event.target.className != "modal") {
-//     container.remove();
-//   }
-// };
-
-// const visit = new Visit();
-// const visitCardiologist = new VisitCardiologist();
-// const visitDentist = new VisitDentist();
-// const visitTherapist = new VisitTherapist();
-// visit.render();

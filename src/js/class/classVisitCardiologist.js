@@ -27,6 +27,7 @@ class VisitCardiologist extends Visit {
       this.BMI,
       this.deseases,
       this.age,
+      this.warning,
       this.createBtn,
       this.closeBtn,
     ]);
@@ -90,10 +91,13 @@ class VisitCardiologist extends Visit {
       if (document.querySelector('.no-items')) {
         document.querySelector('.no-items').remove();
       }
+       this.warning.classList.add("d-none");
       const response = await postVisitFetch(this.setPostObj(), token);
       const card = new Card(await response);
       card.render();
       this.element.remove();
+    } else {
+      this.warning.classList.remove('d-none')
     }
   }
 

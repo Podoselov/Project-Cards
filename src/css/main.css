@@ -175,3 +175,8 @@ body {
 .cards-item-text {
   margin-bottom: 15px;
 }
+
+.warning-title {
+  color: red;
+  padding-bottom: 10px;
+}
