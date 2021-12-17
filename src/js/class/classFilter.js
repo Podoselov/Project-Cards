@@ -50,6 +50,17 @@ class FilterEl extends Element {
     this.select1 = this.renderLabelChildren('selectFilter');
     this.select1.append(this.renderOptionEl('Open'));
     this.select1.append(this.renderOptionEl('Done'));
+    this.select1.addEventListener('change', (e) => {
+      this.cardEl = document.querySelectorAll('.cards-item');
+      this.selectValue = e.target.value.toLowerCase();
+      Array.from(this.cardEl).forEach((el) => {
+        if (el.classList.contains(this.selectValue)) {
+          el.classList.remove('d-none');
+        } else {
+          el.classList.add('d-none');
+        }
+      });
+    });
     this.label2.append(this.select1);
 
     this.label3 = this.renderLabelEl(['label'], 'Urgency');

@@ -1,6 +1,6 @@
 import Button from './classButton.js';
 import Element from './classEL.js';
-import Input from "./classInput.js";
+import Input from './classInput.js';
 import VisitDentist from './classVisitDentist.js';
 import VisitCardiologist from './classVisitCardiologist.js';
 import VisitTherapist from './classVisitTherapist.js';
@@ -42,168 +42,176 @@ class Card extends Element {
   render() {
     this.create();
     this.showMoreBtn.addEventListener(
-      "click",
+      'click',
       this.showMoreListener.bind(this)
     );
-    this.editBtn.addEventListener("click", this.editListener.bind(this));
-    this.deleteBtn.addEventListener("click", this.deleteListener.bind(this));
-    this.doneBtn.addEventListener("click", this.doneBtnListener.bind(this));
+    this.editBtn.addEventListener('click', this.editListener.bind(this));
+    this.deleteBtn.addEventListener('click', this.deleteListener.bind(this));
+    this.doneBtn.addEventListener('click', this.doneBtnListener.bind(this));
   }
   create() {
-    this.containerEl = document.querySelector(".cards-container");
+    this.containerEl = document.querySelector('.cards-container');
     this.element = this.createElement(
-      "div",
-      ["cards-item", this.urgency.toLowerCase()],
+      'div',
+      ['cards-item', 'open', this.urgency.toLowerCase()],
       {
         id: `card-${this.id}`,
       }
     );
     this.element.innerHTML = `<p class="cards-item-text cards-item-text-name">Name: ${this.name}</p><p class="cards-item-text">Doctor: ${this.doctor}</p>`;
-    this.element.append(this.showMoreBtn, this.editBtn,this.doneBtn, this.deleteBtn);
+    this.element.append(
+      this.showMoreBtn,
+      this.editBtn,
+      this.doneBtn,
+      this.deleteBtn
+    );
     return this.containerEl.append(this.element);
   }
 
   deleteBtn() {
-    return new Button(["close-button"], "close-button", "x");
+    return new Button(['close-button'], 'close-button', 'x');
   }
   doneBtn() {
-    return  new Element().createElement("input", ["done-button"], {type: "checkbox"});
+    return new Element().createElement('input', ['done-button'], {
+      type: 'checkbox',
+    });
   }
   showMoreBtn() {
     return new Button(
-      ["button", "cards-button"],
-      "show-more-button",
-      "Show more"
+      ['button', 'cards-button'],
+      'show-more-button',
+      'Show more'
     );
   }
   editBtn() {
-    return new Button(["button", "cards-button"], "edit-button", "Edit");
+    return new Button(['button', 'cards-button'], 'edit-button', 'Edit');
   }
   showMoreListener() {
     this.showMoreBtn.remove();
     const urgency = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Urgency: ${this.urgency}`
     );
     const deseases = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Deseases: ${this.deseases}`
     );
     const target = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Target: ${this.target}`
     );
     const description = new Element().createElement(
-      "p",
-      ["cards-item-text", "card-item-description"],
+      'p',
+      ['cards-item-text', 'card-item-description'],
       {},
       `Description: ${this.description}`
     );
     const pressure = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Pressure: ${this.pressure}`
     );
     const BMI = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `BMI: ${this.BMI}`
     );
     const age = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Age: ${this.age}`
     );
     const lastVisit = new Element().createElement(
-      "p",
-      ["cards-item-text"],
+      'p',
+      ['cards-item-text'],
       {},
       `Last visit: ${this.lastVisit}`
     );
     this.editBtn.before(urgency, target, description);
-    if (this.doctor == "Cardiologist") {
+    if (this.doctor == 'Cardiologist') {
       this.editBtn.before(pressure, BMI, deseases, age);
     }
-    if (this.doctor == "Dentist") {
+    if (this.doctor == 'Dentist') {
       this.editBtn.before(lastVisit);
     }
-    if (this.doctor == "Therapist") {
+    if (this.doctor == 'Therapist') {
       this.editBtn.before(age);
     }
   }
   doneBtnListener() {
     this.element.classList.toggle('done');
+    this.element.classList.toggle('open');
   }
   editListener() {
-    if (this.doctor == "Cardiologist") {
+    if (this.doctor == 'Cardiologist') {
       const visit = new VisitCardiologist();
       visit.render();
-      visit.element.setAttribute("id", this.id);
-      visit.name.querySelector("input").value = this.name;
-      visit.target.querySelector("input").value = this.target;
-      visit.description.querySelector("textarea").value = this.description;
-      visit.age.querySelector("input").value = this.age;
-      visit.BMI.querySelector("input").value = this.BMI;
-      visit.deseases.querySelector("input").value = this.deseases;
-      visit.pressure.querySelector("input").value = this.pressure;
+      visit.element.setAttribute('id', this.id);
+      visit.name.querySelector('input').value = this.name;
+      visit.target.querySelector('input').value = this.target;
+      visit.description.querySelector('textarea').value = this.description;
+      visit.age.querySelector('input').value = this.age;
+      visit.BMI.querySelector('input').value = this.BMI;
+      visit.deseases.querySelector('input').value = this.deseases;
+      visit.pressure.querySelector('input').value = this.pressure;
       visit.urgency
-        .querySelector("select")
+        .querySelector('select')
         .querySelector(`option[value=${this.urgency}`)
-        .setAttribute("selected", "");
-      visit.createBtn.classList.add("update");
-      visit.createBtn.innerHTML = "Update";
+        .setAttribute('selected', '');
+      visit.createBtn.classList.add('update');
+      visit.createBtn.innerHTML = 'Update';
     }
-    if (this.doctor == "Dentist") {
+    if (this.doctor == 'Dentist') {
       const visit = new VisitDentist();
       visit.render();
-      visit.element.setAttribute("id", this.id);
-      visit.name.querySelector("input").value = this.name;
-      visit.target.querySelector("input").value = this.target;
-      visit.description.querySelector("textarea").value = this.description;
-      visit.lastVisit.querySelector("input").value = this.lastVisit;
+      visit.element.setAttribute('id', this.id);
+      visit.name.querySelector('input').value = this.name;
+      visit.target.querySelector('input').value = this.target;
+      visit.description.querySelector('textarea').value = this.description;
+      visit.lastVisit.querySelector('input').value = this.lastVisit;
       visit.urgency
-        .querySelector("select")
+        .querySelector('select')
         .querySelector(`option[value=${this.urgency}`)
-        .setAttribute("selected", "");
-      visit.createBtn.classList.add("update");
-      visit.createBtn.innerHTML = "Update";
+        .setAttribute('selected', '');
+      visit.createBtn.classList.add('update');
+      visit.createBtn.innerHTML = 'Update';
     }
 
-    if (this.doctor == "Therapist") {
+    if (this.doctor == 'Therapist') {
       const visit = new VisitTherapist();
       visit.render();
-      visit.element.setAttribute("id", this.id);
-      visit.name.querySelector("input").value = this.name;
-      visit.target.querySelector("input").value = this.target;
-      visit.description.querySelector("textarea").value = this.description;
-      visit.age.querySelector("input").value = this.age;
+      visit.element.setAttribute('id', this.id);
+      visit.name.querySelector('input').value = this.name;
+      visit.target.querySelector('input').value = this.target;
+      visit.description.querySelector('textarea').value = this.description;
+      visit.age.querySelector('input').value = this.age;
       visit.urgency
-        .querySelector("select")
+        .querySelector('select')
         .querySelector(`option[value=${this.urgency}`)
-        .setAttribute("selected", "");
-      visit.createBtn.classList.add("update");
-      visit.createBtn.innerHTML = "Update";
+        .setAttribute('selected', '');
+      visit.createBtn.classList.add('update');
+      visit.createBtn.innerHTML = 'Update';
     }
   }
   deleteListener() {
     fetch(`https://ajax.test-danit.com/api/v2/cards/${this.id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }).then(() => {
       this.element.remove();
-      if (!document.querySelector(".cards-item")) {
-        document.querySelector(".cards-container").innerHTML =
+      if (!document.querySelector('.cards-item')) {
+        document.querySelector('.cards-container').innerHTML =
           '<p class="no-items">No items have beed added</p>';
       }
     });

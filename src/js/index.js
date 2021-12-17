@@ -46,4 +46,3 @@ if (localStorage.getItem('email')) {
 } else {
   createHtml();
 }
-
